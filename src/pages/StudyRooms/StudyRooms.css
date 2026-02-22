@@ -1,0 +1,25 @@
+/* StudyRooms.css */
+.study-rooms-page { padding: 28px 32px; }
+.rooms-page-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+.rooms-page-header h2 { font-size:22px; font-weight:800; letter-spacing:-0.03em; margin-bottom:4px; }
+.rooms-page-header p  { font-size:13px; color:var(--text-b); }
+.rooms-big-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+.room-big-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl);
+  padding:22px; cursor:pointer; transition:all 0.25s; position:relative; overflow:hidden;
+  animation:fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+}
+.room-big-card:hover { border-color:var(--border-h); transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.room-big-card.live-card { border-color:rgba(245,158,11,0.35); }
+.room-big-card.live-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at top left,rgba(245,158,11,0.07),transparent 60%); pointer-events:none; border-radius:inherit; }
+.rbc-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
+.rbc-emoji { font-size:28px; }
+.rbc-title { font-size:16px; font-weight:700; margin-bottom:4px; }
+.rbc-topic { font-size:12px; color:var(--text-b); margin-bottom:14px; }
+.rbc-meta  { display:flex; align-items:center; justify-content:space-between; padding-top:14px; border-top:1px solid var(--border); }
+.rbc-host  { font-size:11px; color:var(--text-b); }
+.rbc-join  { background:linear-gradient(135deg,#F59E0B,#F97316); color:#000; font-size:11px; font-weight:700; border:none; border-radius:var(--r-md); padding:7px 14px; cursor:pointer; font-family:var(--font-sans); transition:opacity 0.2s; }
+.rbc-join:hover { opacity:0.85; }
+.rbc-join.ghost { background:var(--surface-c); color:var(--text-b); border:1px solid var(--border); }
+.create-room-form { display:flex; flex-direction:column; gap:16px; margin-top:8px; }
+@media (max-width:768px) { .study-rooms-page { padding:16px; } }

@@ -1,0 +1,95 @@
+/* ── TOPBAR ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,8,10,0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-greeting { flex: 1; }
+.topbar-greeting-sub {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-c);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.topbar-greeting-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.topbar-greeting-title span { color: var(--amber); }
+
+.topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 10px 16px;
+  width: 240px;
+  transition: border-color 0.2s, box-shadow 0.2s, width 0.3s;
+}
+.topbar-search:focus-within {
+  border-color: var(--border-f);
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.07);
+  width: 300px;
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text); font-size: 12px;
+  font-family: var(--font-sans); width: 100%;
+}
+.topbar-search input::placeholder { color: var(--text-c); }
+.topbar-search-kbd {
+  font-size: 9px; color: var(--text-d);
+  border: 1px solid var(--border);
+  border-radius: 5px; padding: 2px 5px;
+  font-family: var(--font-mono); white-space: nowrap;
+}
+
+.topbar-icon-btn {
+  width: 40px; height: 40px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-b);
+  transition: all 0.18s;
+  position: relative;
+}
+.topbar-icon-btn:hover { background: var(--surface-c); color: var(--text); }
+.topbar-notif-dot {
+  position: absolute; top: 9px; right: 9px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rose);
+  border: 2px solid var(--bg);
+  animation: pulse 2s ease-in-out infinite;
+}
+.topbar-avatar {
+  width: 40px; height: 40px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg,#F59E0B,#F97316);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; color: #000;
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+.topbar-mobile-menu {
+  display: none;
+}
+@media (max-width: 768px) {
+  .topbar { padding: 16px; }
+  .topbar-search { display: none; }
+  .topbar-mobile-menu { display: flex; }
+}
