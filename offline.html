@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You're offline — LearnVerse</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Sora',-apple-system,sans-serif;
+      background:#08080A;color:#F1F1F3;
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:24px;text-align:center;
+    }
+    .logo{font-size:48px;margin-bottom:24px}
+    h1{font-size:24px;font-weight:700;margin-bottom:12px}
+    p{font-size:14px;color:#A1A1AA;line-height:1.7;max-width:340px;margin:0 auto 28px}
+    .btn{
+      display:inline-block;padding:12px 28px;border-radius:12px;
+      background:linear-gradient(135deg,#F59E0B,#F97316);
+      color:#000;font-weight:700;font-size:13px;cursor:pointer;border:none;
+      font-family:inherit;
+    }
+    .btn:hover{opacity:0.85}
+    .status{
+      display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+      font-size:12px;color:#52525B;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:#F43F5E}
+  </style>
+</head>
+<body>
+  <div>
+    <div class="logo">📚</div>
+    <h1>You're offline</h1>
+    <p>
+      LearnVerse needs a connection to load. Check your internet and try again —
+      any content you've already opened is still available.
+    </p>
+    <button class="btn" onclick="window.location.reload()">Try again</button>
+    <div class="status">
+      <span class="dot"></span>
+      No connection detected
+    </div>
+  </div>
+  <script>
+    // Auto-reload when connection comes back
+    window.addEventListener('online', () => window.location.reload());
+  </script>
+</body>
+</html>
