@@ -4,15 +4,17 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/learn_verse/', // ✅ CRITICAL for GitHub Pages
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+
   server: {
     port: 3000,
     proxy: {
-      // All /api calls proxy to your Python FastAPI backend
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
@@ -20,6 +22,7 @@ export default defineConfig({
       },
     },
   },
+
   build: {
     outDir: 'dist',
     sourcemap: true,

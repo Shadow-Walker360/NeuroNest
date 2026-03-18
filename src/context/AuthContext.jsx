@@ -5,23 +5,46 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser]       = useState(null);
-  const [loading, setLoading] = useState(true); // true on first load (hydrate from token)
+  const [loading, setLoading] = useState(true);
   const [ready, setReady]     = useState(false);
 
   // ── Hydrate session on mount ──────────────────────────
   useEffect(() => {
-    const token = localStorage.getItem('lv_token');
+    const token     = localStorage.getItem('lv_token');
+    const cachedRaw = localStorage.getItem('lv_user');
+
     if (!token) {
       setLoading(false);
       setReady(true);
       return;
     }
-    // Validate token with backend
+
+    // Demo token — skip network entirely, trust localStorage
+    if (token.startsWith('demo_')) {
+      try { setUser(JSON.parse(cachedRaw)); } catch (_) {}
+      setLoading(false);
+      setReady(true);
+      return;
+    }
+
+    // Real token — hydrate from cache immediately so UI is not blank,
+    // then silently validate with backend in the background.
+    if (cachedRaw) {
+      try { setUser(JSON.parse(cachedRaw)); } catch (_) {}
+    }
+
     AuthAPI.me()
-      .then((data) => setUser(data))
+      .then((data) => {
+        setUser(data);
+        localStorage.setItem('lv_user', JSON.stringify(data));
+      })
       .catch(() => {
-        localStorage.removeItem('lv_token');
-        localStorage.removeItem('lv_user');
+        // Only wipe session if we have no local cache to fall back on
+        if (!cachedRaw) {
+          localStorage.removeItem('lv_token');
+          localStorage.removeItem('lv_user');
+          setUser(null);
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -64,10 +87,37 @@ export function AuthProvider({ children }) {
     });
   }, []);
 
+  // ── Demo login — bypasses the real API entirely ───────
+  const demoLogin = useCallback(async () => {
+    const demoUser = {
+      id: 1,
+      email: 'demo@learnverse.com',
+      first_name: 'Alex',
+      last_name: 'Kimani',
+      country: 'KE',
+      country_code: 'KE',
+      level: 24,
+      xp: 4820,
+      education_system: 'Kenya CBC & 8-4-4 Systems',
+      study_level: 'Senior Secondary',
+      grade: 'Grade 12',
+      school_type: 'national_school',
+      target_qualification: 'KCSE',
+      role: 'student',
+    };
+    localStorage.setItem('lv_token', 'demo_token_learnverse');
+    localStorage.setItem('lv_user', JSON.stringify(demoUser));
+    setUser(demoUser);
+    return demoUser;
+  }, []);
+
   const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, loading, ready, isAuthenticated, login, register, logout, updateUser }}>
+    <AuthContext.Provider value={{
+      user, loading, ready, isAuthenticated,
+      login, register, logout, updateUser, demoLogin,
+    }}>
       {ready ? children : null}
     </AuthContext.Provider>
   );

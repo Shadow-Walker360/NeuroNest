@@ -1,14 +1,54 @@
 {
-  "name": "NeuroNest",
-  "short_name": "NN",
-  "description": "AI-Powered Personalized Learning Platform",
+  "name": "LearnVerse — AI-Powered Learning",
+  "short_name": "LearnVerse",
+  "description": "AI-powered personalised learning platform for students worldwide. Curriculum-aware, gamified, and built for every country.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#F59E0B",
   "background_color": "#08080A",
+  "categories": ["education", "productivity"],
+  "lang": "en",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
-  ]
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Home",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI Tutor",
+      "short_name": "AI Tutor",
+      "url": "/ai-tutor",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Study Rooms",
+      "short_name": "Rooms",
+      "url": "/study-rooms",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
 }

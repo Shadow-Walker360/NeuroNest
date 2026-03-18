@@ -3,12 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- removed <meta name="theme-color"> because it is not supported by Firefox/Opera; set "theme_color" in /manifest.json for PWA/theme color support -->
+    <!-- SEO + PWA theme colors -->
+    <!-- theme color is provided via manifest.json (theme_color) for broader cross-browser support; removed meta[name=theme-color] which is not supported in Firefox/Opera -->
+    <meta name="msapplication-TileColor" content="#F59E0B" />
+
+    <!-- Core SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="LearnVerse, AI learning, personalized learning, e-learning, tutoring, education" />
+    <link rel="canonical" href="https://learnverse.example.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="LearnVerse — AI-Powered Learning" />
+    <meta property="og:description" content="AI-powered personalized learning platform for students worldwide." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://learnverse.example.com/" />
+    <meta property="og:image" content="https://learnverse.example.com/og-image.png" />
+    <meta property="og:site_name" content="LearnVerse" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@LearnVerse" />
+    <meta name="twitter:title" content="LearnVerse — AI-Powered Learning" />
+    <meta name="twitter:description" content="AI-powered personalized learning platform for students worldwide." />
+    <meta name="twitter:image" content="https://learnverse.example.com/og-image.png" />
+
+    <!-- Structured data (JSON-LD) -->
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Organization","name":"LearnVerse","url":"https://learnverse.example.com/","logo":"https://learnverse.example.com/logo.png"}
+    </script>
     <meta name="description" content="LearnVerse — AI-powered personalized learning platform for students worldwide." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="LearnVerse" />
 
     <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,5 +53,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js', { scope: '/' })
+            .then((reg) => {
+              console.log('[LearnVerse SW] Registered, scope:', reg.scope);
+            })
+            .catch((err) => {
+              console.warn('[LearnVerse SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
